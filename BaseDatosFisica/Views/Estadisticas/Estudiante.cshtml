@@ -1,0 +1,59 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.EstadisticaEstudianteTestViewModel
+@{
+    ViewBag.Title = "Estudiante";
+}
+
+<h2>Porcentaje de aciertos de los estudiantes por test</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Estudiante
+        </th>
+        @foreach (var test in Model.Tests)
+        {
+            <th>
+                @test.Nombre
+            </th>
+        }
+        <th>
+            Total
+        </th>
+    </tr>
+    @foreach (var estudiante in Model.Estudiantes)
+    {
+        var totalCorrectas = 0; var totalTest = 0;
+        <tr>
+            <td>
+                @estudiante.Estudiante.Nombre
+            </td>
+            
+            @foreach (var test in Model.Tests)
+            {
+                if (estudiante.Correctas.ContainsKey(test.TestID))
+                {
+                    var cantCorrectas = estudiante.Correctas[test.TestID];
+                    var total = Model.Total[test.TestID];
+                    var porcentaje = total != 0 ? Math.Round((double)cantCorrectas / total * 100, 0) : 0;
+
+                    totalCorrectas += cantCorrectas; totalTest += total;
+
+                    <td>
+                        @cantCorrectas/@total (@porcentaje%)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        No realizado
+                    </td>
+                }
+            }
+
+            @{var porcentajeTotal = totalTest != 0 ? @Math.Round((double)totalCorrectas / totalTest * 100, 0) : 0;}
+            <td>
+                @totalCorrectas/@totalTest (@porcentajeTotal%)
+            </td>
+        </tr>
+    }
+</table>

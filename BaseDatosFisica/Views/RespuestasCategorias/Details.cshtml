@@ -1,0 +1,34 @@
+﻿@model BaseDatosFisica.Models.RespuestaCategoria
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RespuestaCategoria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.CategoriaNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.CategoriaNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Respuesta.Texto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Respuesta.Texto)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.RespuestaCategoriaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

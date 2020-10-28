@@ -1,0 +1,165 @@
+﻿@model BaseDatosFisica.Models.Pregunta
+
+@{
+    ViewBag.Title = "Crear Pregunta";
+}
+
+<h2>Crear pregunta</h2>
+
+<script type="text/javascript">
+    function s() {
+        var tiempo = document.getElementById("Tiempo");
+        var nombre = document.getElementById("Nombre");
+        var enunciado = document.getElementById("Enunciado");
+        var imagen = document.getElementById("Imagen");
+        var tipo = document.getElementById("Tipo");
+       
+        document.getElementById("Nombre_").setAttribute("value", nombre.value);
+        document.getElementById("Tiempo_").setAttribute("value", tiempo.value);
+        document.getElementById("Enunciado_").setAttribute("value", enunciado.value);
+        
+            
+            
+            document.getElementById("Tipo_").setAttribute("value", tipo.value);
+      
+        document.getElementById("Imagen_").setAttribute("value", imagen.value);
+        
+        return true;
+    }
+</script>
+<div class="form-horizontal">
+    <h4>Pregunta</h4>
+
+    <form method="post" action="@Url.Action("AgregarIntroduccion")" onsubmit="s()">
+        <input type="hidden" name="Tiempo_" id="Tiempo_" />
+        <input type="hidden" name="Enunciado_" id="Enunciado_" />
+        <input type="hidden" name="Imagen_" id="Imagen_" />
+        <input type="hidden" name="Tipo_" id="Tipo_" />
+        <input type="hidden" name="Nombre_" id="Nombre_" />
+        @if ((bool)Model.Introduccion)
+        {
+            <input type="hidden" name="Introduccion_" value="true" />
+        }
+        else
+        {
+            <input type="hidden" name="Introduccion_" value="false" />
+        }
+
+        <div class="form-group">
+            <div>
+                @{ string s = (Model.Introduccion != null && (bool)Model.Introduccion) ? "Quitar Introducción" : "Agregar Introducción";}
+                <input type="submit" value="@s" class="btn-link" />
+            </div>
+        </div>
+    </form>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                   <select name="Tipo" id="Tipo" class="form-control">
+                       @if (Model.Tipo)
+                       {
+                        <option selected="selected" value="true">Si</option>
+                        <option  value="false">No</option>
+                       }
+                       else
+                       {
+                        <option value="true">Si</option>
+                        <option value="false" selected="selected">No</option>
+                       }
+                       
+                   </select>
+                  
+                    @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2"})
+            <div class="col-md-10">
+                <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre"/>
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Enunciado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="Enunciado" id="Enunciado" class="form-control" value="@Model.Enunciado" />
+                @Html.ValidationMessageFor(model => model.Enunciado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Imagen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="Imagen" id="Imagen" class="form-control" value="@Model.Imagen" />
+                @Html.ValidationMessageFor(model => model.Imagen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tiempo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="number" name="Tiempo" id="Tiempo" class="form-control" value="@Model.Tiempo" />
+                @Html.ValidationMessageFor(model => model.Tiempo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        if (Model.Introduccion != null && (bool)Model.Introduccion)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.EnunciadoPrevio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" name="EnunciadoPrevio" class="form-control"/>
+                    @Html.ValidationMessageFor(model => model.EnunciadoPrevio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TiempoPrevio, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="number" name="TiempoPrevio" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.TiempoPrevio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImagenPrevia, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="text" name="ImagenPrevia" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.ImagenPrevia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Atras", "Index")
+</div>
+
+<script type="text/javascript">
+    function click() {
+        alert("espera");
+
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

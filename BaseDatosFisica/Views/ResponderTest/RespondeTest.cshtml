@@ -1,0 +1,16 @@
+﻿@model BaseDatosFisica.Models.Test
+
+@{
+    ViewBag.Title = "RespondeTest";
+}
+
+<h1>Bienvenido</h1><br/>
+
+Test @Model.Nombre del curso
+<br />
+<br />
+
+  
+<p>
+    @Html.ActionLink("Clickea aqui para comenzar el test", "ResponderPreguntas", new { idTest = Model.TestID })
+</p>

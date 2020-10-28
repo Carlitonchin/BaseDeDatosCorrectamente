@@ -1,0 +1,73 @@
+﻿@model BaseDatosFisica.Models.Test
+
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Test @Model.Nombre</h2>
+
+<div>
+    @Html.ActionLink("Cambiar Nombre", "Edit", new { id = Model.TestID }) | @Html.ActionLink("Eliminar", "Delete", new { id = Model.TestID })
+    <br />
+    <br />
+    @if (!Model.Visible)
+    {
+        @Html.ActionLink("Habilitar para los estudiantes", "Visibilidad", new { idTest = Model.TestID });
+    }
+   
+    @if (Model.Visible)
+    {
+        @Html.ActionLink("Deshabilitar para los estudiantes", "Visibilidad", new { idTest = Model.TestID });
+    }
+    <hr />
+    <h3 align="center">
+        Este Test pertenece a los cursos:
+    </h3>
+    <br />
+    <table class="table" align="center">
+      
+        @foreach (var item in Model.TestCursos)
+        {
+            int anhofinal = item.Curso.Anho + 1;
+
+            <tr align="center">
+                <td>@item.Curso.Anho - @anhofinal  |  @Html.ActionLink("Quitar del curso", "QuitarDelCurso", new { id = item.TestCursoID})</td>
+
+
+                <td></td>
+                
+            </tr>
+
+        }
+    </table>
+    <br />
+    <br />
+    <div align="center">
+        @Html.ActionLink("Agregar Pregunta", "AgregarPregunta", new { idTest = Model.TestID })</td>
+        <h3 align="center">
+            Preguntas:
+        </h3>
+    </div>
+    
+    <table class="table" align="left">
+      
+        @foreach (var item in Model.TestPreguntas)
+        {
+
+            <tr align="center">
+                <td>@Html.ActionLink(item.Pregunta.Nombre, "MostrarPregunta", new {idTest = Model.TestID, idPregunta = item.PreguntaID })</td>
+                <td>@Html.ActionLink("Quitar Pregunta", "QuitarPregunta", new { id = item.TestPreguntaID })</td>
+                
+            </tr>
+
+        }
+    </table>
+
+    <br />
+    <br />
+    
+</div>
+<p>
+    
+    @Html.ActionLink("Atrás", "Index")
+</p>

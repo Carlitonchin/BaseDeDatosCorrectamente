@@ -1,0 +1,11 @@
+﻿@model IEnumerable<BaseDatosFisica.Models.TestEstudiante>
+@{
+    ViewBag.Title = "Calificaciones";
+}
+
+<h2>Test Realizados:</h2>
+@foreach (var item in Model)
+{
+    @Html.ActionLink(item.test.Nombre, "Nota", new { idTestEstudiante = item.TestEstudianteID });
+    <br />
+}

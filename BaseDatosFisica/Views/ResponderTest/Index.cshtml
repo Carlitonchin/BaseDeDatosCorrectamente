@@ -1,0 +1,20 @@
+﻿@using BaseDatosFisica.Models
+@model IEnumerable<Test>
+@{
+    ViewBag.Title = "Tests";
+
+}
+
+<h2>Tests</h2>
+
+@foreach (var k in Model)
+{
+    <th>
+     
+            <td>
+                @Html.ActionLink(k.Nombre, "RespondeTest", new { idTest = k.TestID}) <br />
+            </td>
+        
+    </th>
+}
+

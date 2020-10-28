@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BaseDatosFisica.Models.RespuestaCategoria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria.CategoriaNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Respuesta.Texto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria.CategoriaNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Respuesta.Texto)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.RespuestaCategoriaID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.RespuestaCategoriaID }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.RespuestaCategoriaID })
+        </td>
+    </tr>
+}
+
+</table>

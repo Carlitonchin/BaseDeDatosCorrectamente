@@ -1,0 +1,75 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.TestEstudiantesCategoriasViewModel
+@{
+    ViewBag.Title = "Nota";
+}
+
+<h2>@Model.testEstudiante.estudiante.Nombre</h2>
+<br />
+<h2>@Model.testEstudiante.test.Nombre</h2>
+<br />
+<table class="table table-bordered">
+    <tr align="center">
+
+        <th>
+
+        </th>
+       
+        @foreach (var cat in Model.categorias)
+        {
+            <th>@cat.CategoriaNombre</th>
+        }
+
+    </tr>
+
+   
+        @foreach (var preg in Model.testEstudiante.test.TestPreguntas)
+        {
+            <tr align="center">
+                <th>@preg.Pregunta.Nombre</th>
+                @foreach (var cat in Model.categorias)
+                {
+                    if (preg.Pregunta.Respuestas.FirstOrDefault(m => m.RespuestaCategorias != null && m.RespuestaCategorias.Count > 0 && m.RespuestaCategorias.FirstOrDefault(h => h.CategoriaID == cat.CategoriaID) != null) != null)
+                    {
+
+                        if (!preg.Pregunta.Tipo)
+                        {
+                            if (Model.testEstudiante.RespuestasEscritas == null || Model.testEstudiante.RespuestasEscritas.Count == 0)
+                            {
+                                <td><h4 style="color:#ff0000">0</h4></td>
+                            }
+                            else if (Model.testEstudiante.RespuestasEscritas.FirstOrDefault(m => m.PreguntaID == preg.PreguntaID && preg.Pregunta.Respuestas.FirstOrDefault(h => h.Texto.ToUpper() == m.Respuesta.ToUpper() && h.RespuestaCategorias.FirstOrDefault(k => k.CategoriaID == cat.CategoriaID) != null) != null) != null)
+                            {
+                                <td><h4 style="color:#00ff21">1</h4></td>
+                            }
+                            else
+                            {
+                                <td><h4 style="color:#ff0000">0</h4></td>
+                            }
+                        }
+                        else
+                        {
+                            if (Model.testEstudiante.RespuestasMarcadas == null || Model.testEstudiante.RespuestasMarcadas.Count == 0)
+                            {
+                                <td><h4 style="color:#ff0000">0</h4></td>
+                            }
+                            else if (Model.testEstudiante.RespuestasMarcadas.FirstOrDefault(m => m.Respuesta.PreguntaID == preg.PreguntaID && m.Respuesta.RespuestaCategorias.FirstOrDefault(h => h.CategoriaID == cat.CategoriaID) != null) != null)
+                            {
+                                <td><h4 style="color:#00ff21">1</h4></td>
+                            }
+                            else
+                            {
+                                <td><h4 style="color:#ff0000">0</h4></td>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <td><h4 class="text-muted">-</h4></td>
+                    }
+                }
+            </tr>
+        }
+
+
+</table>
+

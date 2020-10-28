@@ -1,0 +1,82 @@
+﻿@model BaseDatosFisica.Models.PreguntaEspecial
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PreguntaEspecial</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enunciado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enunciado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imagen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Imagen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tiempo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tiempo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TiempoPrevio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TiempoPrevio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagenPrevia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagenPrevia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnunciadoPrevio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnunciadoPrevio)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PreguntaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

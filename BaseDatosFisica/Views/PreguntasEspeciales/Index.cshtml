@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BaseDatosFisica.Models.PreguntaEspecial>
+
+@{
+    ViewBag.Title = "Pregunta Especial";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enunciado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imagen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tiempo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TiempoPrevio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagenPrevia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnunciadoPrevio)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enunciado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imagen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tiempo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TiempoPrevio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImagenPrevia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnunciadoPrevio)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PreguntaID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PreguntaID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PreguntaID })
+        </td>
+    </tr>
+}
+
+</table>

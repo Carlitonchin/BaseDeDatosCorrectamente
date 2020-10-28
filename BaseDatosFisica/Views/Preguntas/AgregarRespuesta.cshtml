@@ -1,0 +1,25 @@
+﻿@model BaseDatosFisica.Models.Pregunta
+@{
+    ViewBag.Title = "AgregarRespuesta";
+}
+
+<h2>Agregue respuestas a la pregunta @Model.Nombre</h2>
+@Html.ActionLink("Agregar Respuesta", "Create", "Respuestas", new { idPregunta = Model.PreguntaID}, null)
+<h3>Respuestas:</h3>
+<table class="table">
+    @foreach (var resp in Model.Respuestas)
+    {
+        <tr>
+            <th>
+                @Html.ActionLink(resp.Texto, "Respuesta", "Respuestas", new { idRespuesta = resp.RespuestaID }, null)
+            </th>
+
+            <th>
+                @Html.ActionLink("Quitar Respuesta", "QuitarRespuesta", new { idRespuesta = resp.RespuestaID, idPregunta = resp.PreguntaID })
+            </th>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Atras", "Index")
+

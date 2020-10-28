@@ -1,0 +1,95 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.AgregarPreguntaAlTest
+@{
+    ViewBag.Title = "AgregarPregunta";
+}
+
+<h2>Agregar preguntas al test @Model.test.Nombre</h2>
+<br />
+@Html.ActionLink("Crear nueva pregunta", "Create", "Preguntas")
+<table class="table">
+    <tr>
+        <th>
+            <h3>Preguntas del test:</h3>
+            <br />
+
+            @foreach (var pregunta in Model.test.TestPreguntas)
+            {
+                @Html.ActionLink(pregunta.Pregunta.Nombre, "MostrarPregunta", new { idTest = Model.test.TestID, idPregunta = pregunta.PreguntaID })
+                <br />
+            }
+        </th>
+        <th>
+            <div align="center">
+                <h2 align="left">Filtros</h2>
+                <form method="post" action="@Url.Action("Filtrar")">
+                        <div class="form-group">
+                                <div align="left">
+                                    <input type="text" class="form-control" name="Nombre" placeholder="Nombre"/>
+                                </div>
+                                <input type="hidden" name="idTest" value="@Model.test.TestID">
+                        </div>
+                   
+                <table class="table">
+                    @{ int j = 0;}
+                    @foreach (var cat in Model.FiltroCategorias)
+                    {
+                        <tr>
+                            <div class="form-group">
+                                <td>
+                                    <input type="hidden" name="index" value="@j">
+                                    <input type="checkbox" name="[@j]" value="@cat.CategoriaID">
+                                </td>
+                                <td>
+                                    <p>@cat.CategoriaNombre</p>
+                                </td>
+                            </div>
+                        </tr>
+                        j++;
+                    }
+                </table>
+
+                    <div class="form-group" align="left">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Filtrar" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </th>
+        <th>
+            <div align="center">
+                <h2>Seleccione:</h2><br />
+                @{ int i = 0;}
+                <form method="post" action="@Url.Action("AgregarPregunta")">
+                    <div class="form-group">
+                        <input type="hidden" name="idTest" value="@Model.test.TestID"/>
+                    </div>
+
+                    @foreach (var pregunta in Model.preguntas)
+                    {
+                        <div class="form-group">
+                            <input type="hidden" name="index" value="@i"/>
+                            
+                                <input type="checkbox" name="[@i]" value="@pregunta.PreguntaID" id="@i" />
+                                @Html.ActionLink(pregunta.Nombre, "MostrarPregunta", new { idTest = Model.test.TestID, idPregunta = pregunta.PreguntaID })
+                          
+                            @{i++;}
+                        </div>
+                       
+                        
+                    }
+                    <br />
+                    <div class="col-md-8">
+                        <div class="col-md-offset-2 col-md-10" align="right">
+                            <input type="submit" value="Agregar" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </th>
+    </tr>
+</table>
+<br />
+@Html.ActionLink("Atrás", "Test", new { id = Model.test.TestID })
+        
+    

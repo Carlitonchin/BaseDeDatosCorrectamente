@@ -1,0 +1,10 @@
+﻿@model int
+@{
+    ViewBag.Title = "TiempoAgotado";
+}
+
+<h2>El tiempo se agotó</h2>
+
+<br />
+@Html.ActionLink("Siguiente Pregunta", "ResponderPreguntas", new { idTest = Model}, htmlAttributes: new { @class = "button" })
+

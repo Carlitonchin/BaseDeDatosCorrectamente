@@ -1,0 +1,88 @@
+﻿@model BaseDatosFisica.Models.Pregunta
+
+@{
+    ViewBag.Title = "MostrarPregunta";
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Atrás", "Test", new { id = ViewBag.idTest }, htmlAttributes: new { @class = "btn btn-default" })
+        </th>
+
+        <th>
+            <h2>Pregunta: @Model.Nombre</h2>
+
+            @Html.ActionLink("Editar", "Edit", "Preguntas", new { id = Model.PreguntaID }, null)
+        </th>
+    </tr>
+    
+</table>
+
+<br />
+<table class="table">
+    <tr>
+        <th align="left">
+
+            <h3 class="text-info">@Model.Enunciado</h3>
+            @if (Model.Imagen != null)
+            {
+                <img src="@Url.Content("~/Images/" + Model.Imagen)" width="300px" height="200px" />
+            }
+            <h3 class="text-danger">Tiempo: @Model.Tiempo</h3>
+            @if (Model.Tipo)
+            {
+                <h3>La pregunta es de marcar</h3>
+                <h3>Las posibles respuestas son:</h3>
+            }
+
+
+            @if (!Model.Tipo)
+            {
+                <h3>La pregunta es de responder</h3>
+
+                <h3>Las respuestas correctas son:</h3>
+                <hr />
+            }
+
+            @{int i = 1; }
+            @foreach (var respuesta in Model.Respuestas)
+            {
+                <h4 class="text-info">@i- @respuesta.Texto</h4>
+
+                int j = 0;
+                foreach (var categoria in respuesta.RespuestaCategorias)
+                {
+                    if (j == 0)
+                    {
+                        <h4 class="text-muted">--- Categorías:</h4>
+                    }
+                    <p class="text-success">---> @categoria.Categoria.CategoriaNombre</p>
+                    j++;
+                }
+                if (j == 0)
+                {
+                    <p class="text-danger">---> No aporta</p>
+
+                }
+                i++;
+                <hr />
+            }
+        </th>
+        <th>
+            @if (Model.EnunciadoPrevio != null)
+            {
+                <h3 class="text-info">Previo a la pregunta</h3>
+                <h3 class="text-info">@Model.EnunciadoPrevio</h3>
+                if (Model.ImagenPrevia != null)
+                {
+                    <img src="@Url.Content("~/Images/" + Model.ImagenPrevia)" width="300px" height="200px" />
+                }
+
+                <h3 class="text-danger">Tiempo: @Model.TiempoPrevio</h3>
+            }
+           
+           
+        </th>
+    </tr>
+
+</table>

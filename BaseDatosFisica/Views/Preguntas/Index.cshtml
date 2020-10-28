@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BaseDatosFisica.Models.Pregunta>
+
+@{
+    ViewBag.Title = "Preguntas";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear Nueva", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enunciado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imagen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tiempo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo)
+        </td>
+        <td>
+            @Html.ActionLink(item.Nombre, "AgregarRespuesta", new { idPregunta = item.PreguntaID})
+           
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enunciado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imagen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tiempo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.PreguntaID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.PreguntaID }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.PreguntaID })
+        </td>
+    </tr>
+}
+
+</table>

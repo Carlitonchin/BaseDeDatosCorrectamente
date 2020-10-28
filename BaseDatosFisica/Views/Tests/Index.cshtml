@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BaseDatosFisica.Models.Curso>
+
+@{
+    ViewBag.Title = "Tests";
+}
+
+<h2>Tests</h2>
+
+<p>
+    @Html.ActionLink("Crear un nuevo test", "Create", new { @class = "btn btn-primary btn-lg" })
+</p>
+<table class="table">
+  
+
+@foreach (var item in Model) {
+    <tr>
+        <div>
+            @{ int sig = item.Anho + 1;}
+            <h3>Curso @item.Anho-@sig</h3>
+            @Html.ActionLink("Añadir test a este curso", "AnhadirTest", new { idCurso = item.CursoID })
+        </div>
+        
+    </tr>
+    <br />
+   foreach (var k in item.TestCursos)
+   {
+    <tr>
+        @Html.ActionLink(k.Test.Nombre, "Test", new { id = k.TestID})
+        
+    </tr>
+    <br />
+    }
+    <br />
+}
+
+</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
+}

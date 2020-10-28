@@ -1,0 +1,55 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.AgregarCategoriasARespuesta
+@{
+    ViewBag.Title = "AgregarCategoria";
+}
+
+<h2>Agregar categorias a una de las respuestas de la pregunta @Model.respuesta.Pregunta.Nombre</h2>
+<br />
+@Html.ActionLink("Crear Categoria", "CreateDesdeRespuesta", "Categorias", new { idRespuesta = Model.respuesta.RespuestaID}, null)
+<table class="table">
+    <tr>
+        <th>
+            <h3>Categorias de la respuesta:</h3>
+            <br />
+
+            @foreach (var cat in Model.respuesta.RespuestaCategorias)
+            {
+                @Html.ActionLink(cat.Categoria.CategoriaNombre, "EditDesdeRespuesta", "Categorias", new { idCategoria = cat.CategoriaID, idRespuesta = cat.RespuestaID }, null)
+                <br />
+            }
+        </th>
+        <th>
+            <div align="center">
+                <h2>Seleccione:</h2><br />
+                @{ int i = 0;}
+                <form method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="idRespuesta" value="@Model.respuesta.RespuestaID" />
+                    </div>
+
+                    @foreach (var cat in Model.categorias)
+                    {
+                        <div class="form-group">
+                            <input type="hidden" name="index" value="@i" />
+
+                            <input type="checkbox" name="[@i]" value="@cat.CategoriaID" id="@i" />
+                            @Html.ActionLink(cat.CategoriaNombre, "EditDesdeRespuesta", "Categorias", new { idCategoria = cat.CategoriaID, idRespuesta = Model.respuesta.RespuestaID }, null)
+                            @{i++;}
+                        </div>
+
+
+                                }
+                    <br />
+                    <div class="col-md-8">
+                        <div class="col-md-offset-2 col-md-10" align="right">
+                            <input type="submit" value="Agregar" class="btn btn-default" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </th>
+    </tr>
+</table>
+<br />
+@Html.ActionLink("Atrás", "Respuesta", new { idRespuesta = Model.respuesta.RespuestaID })
+

@@ -1,0 +1,27 @@
+﻿@model BaseDatosFisica.Models.Respuesta
+@{
+    ViewBag.Title = "Respuesta";
+}
+
+<h2>Respuesta a la pregunta @Model.Pregunta.Nombre</h2>
+@Html.ActionLink("Editar respuesta", "Edit", new { id = Model.RespuestaID }, null)
+<br />
+@Html.ActionLink("Agregar o editar categorías", "AgregarCategoria", new { idRespuesta = Model.RespuestaID }, null)
+<h2>Categorías:</h2>
+<table class="table">
+    @foreach (var cat in Model.RespuestaCategorias)
+    {
+
+        <tr>
+            <th>
+               <p>@cat.Categoria.CategoriaNombre</p>
+            </th>
+
+            <th>
+                @Html.ActionLink("Quitar Categoría", "QuitarCategoria", new { id = cat.RespuestaCategoriaID })
+            </th>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Atras", "AgregarRespuesta", "Preguntas", new { idPregunta = Model.PreguntaID}, null)

@@ -1,0 +1,135 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.ResponderTestViewModel
+
+
+@{
+    ViewBag.Title = "Responder Preguntas";
+}
+
+
+<script type="text/javascript">
+
+    var respuesta = -1;
+    var reload = true;
+    var tiempo = parseInt(@Model.TiempoRestante) + 1;
+    function hola() {
+
+        document.write("OK");
+    }
+
+    function Tiempo() {
+
+        var h3 = document.getElementById("tiempoRestante");
+        tiempo -= 1;
+        if (tiempo <= 0) {
+            var s = document.getElementById("submit");
+            location.reload(true);
+        }
+            
+        h3.innerHTML = "Tiempo Restante " + tiempo;
+        window.setTimeout("Tiempo()", 1000);
+    }
+
+    function cambie(check) {
+       
+        respuesta = parseInt(check.id);
+        var checks = document.getElementsByTagName('input');
+        for (var i = 0; i < checks.length; i++) {
+            if (checks[i].type != "checkbox")
+                continue;
+
+            if (checks[i].id != check.id)
+                checks[i].checked = false;
+
+        }
+        
+    }
+
+</script>
+
+
+<body onload="Tiempo()">
+
+    <h2 class="text-success">Test @Model.test.Nombre</h2>
+
+    <table class="table" id="contenedor">
+        <tr>
+
+            <th>
+                <div align="left">
+                    <div class="col-md-8"><p class="text-info">Pregunta</p></div>
+                    <div class="col-md-8"><p>@Model.pregunta.Enunciado</p></div>
+
+                    <div class="col-md-8">
+                        <img src="@Url.Content("~/images/" + Model.pregunta.Imagen)" width="300px" height="200px" />
+                       
+                        <h3 id="tiempoRestante">Tiempo Restante</h3>
+                    </div>
+
+                    <div class="col-md-8">
+                        <br />
+                        <br />
+                        <br />
+                        <div />
+                    </div>
+                </div>
+            </th>
+
+            <th>
+                <div align="right">
+
+                    <form method="post">
+                        <input type="hidden" name="idPregunta" value="@Model.pregunta.PreguntaID" />
+                        <input type="hidden" name="idTest" value="@Model.test.TestID" />
+                        <div align="center">
+                            @if (!Model.pregunta.Tipo)
+                            {
+                                <p>Responde aquí</p>
+                                <br />
+
+                                <input type="text" class="form-control" name="respuesta_actual" />
+
+                                <br />
+                            }
+                            else
+                            {
+                                <p>Selecciona la respuesta correcta</p>
+                                int i = 0;
+
+                                foreach (var resp in Model.pregunta.Respuestas)
+                                {
+
+                                    <div class="form-group">
+                                        <input type="hidden" name="index" value="@i" />
+
+                                        <input type="checkbox" name="[@i]" value="@resp.RespuestaID" id="@i" onchange="cambie(this)" />
+                                        @resp.Texto
+
+                                    </div>
+                                    i++;
+
+                                }
+
+                            }
+                            <input id="submit" type="submit" value="Siguiente" />
+                        </div>
+                    </form>
+
+                </div>
+            </th>
+        </tr>
+
+
+    </table>
+
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
+}
+
+
+
+
+
+

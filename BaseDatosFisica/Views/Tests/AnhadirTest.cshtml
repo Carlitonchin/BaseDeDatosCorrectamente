@@ -1,0 +1,40 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.AnhadirTestAlCurso
+
+@{
+    ViewBag.Title = "Añadir Test";
+}
+@{
+    int anhosig = Model.curso.Anho + 1;
+    }
+<h2>Añadir Test al curso @Model.curso.Anho-@anhosig</h2>
+
+<form method="post">
+    <div class="form-horizontal">
+        <div class="form-group">
+
+            <input type="text" name="idCurso" value="@Model.curso.CursoID" hidden="hidden" class="col-md-offset-2 col-md-10" />
+            <div class="col-md-10">
+                <select name="idTest" class="form-control">
+                    @foreach (var item in Model.tests)
+            {
+                        <option value="@item.TestID">@item.Nombre</option>
+
+                    }
+                </select>
+
+
+
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Añadir" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+
+</form>
+
