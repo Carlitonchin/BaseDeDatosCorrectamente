@@ -26,6 +26,7 @@
         </div>
         
             <input type="hidden" id="idRespuesta" name="idRespuesta" value="@ViewBag.idRespuesta"/>
+            <input type="hidden" id="idTest" name="idTest" value="@ViewBag.idTest" />
         
 
         <div class="form-group">
@@ -37,7 +38,7 @@
 }
 
 <div>
-    @Html.ActionLink("Atras", "AgregarCategoria", "Respuestas", new {idRespuesta = ViewBag.idRespuesta })
+    @Html.ActionLink("Atras", "AgregarCategoria", "Respuestas", new {idRespuesta = ViewBag.idRespuesta, idTest = ViewBag.idTest }, null)
 </div>
 
 @section Scripts {

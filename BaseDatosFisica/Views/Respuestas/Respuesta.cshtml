@@ -4,9 +4,9 @@
 }
 
 <h2>Respuesta a la pregunta @Model.Pregunta.Nombre</h2>
-@Html.ActionLink("Editar respuesta", "Edit", new { id = Model.RespuestaID }, null)
+@Html.ActionLink("Editar respuesta", "Edit", new { id = Model.RespuestaID , idTest = ViewBag.idTest}, null)
 <br />
-@Html.ActionLink("Agregar o editar categorías", "AgregarCategoria", new { idRespuesta = Model.RespuestaID }, null)
+@Html.ActionLink("Agregar o editar categorías", "AgregarCategoria", new { idRespuesta = Model.RespuestaID, idTest = ViewBag.idTest }, null)
 <h2>Categorías:</h2>
 <table class="table">
     @foreach (var cat in Model.RespuestaCategorias)
@@ -18,10 +18,10 @@
             </th>
 
             <th>
-                @Html.ActionLink("Quitar Categoría", "QuitarCategoria", new { id = cat.RespuestaCategoriaID })
+                @Html.ActionLink("Quitar Categoría", "QuitarCategoria", new { id = cat.RespuestaCategoriaID, idTest = ViewBag.idTest })
             </th>
         </tr>
     }
 </table>
 
-@Html.ActionLink("Atras", "AgregarRespuesta", "Preguntas", new { idPregunta = Model.PreguntaID}, null)
+@Html.ActionLink("Atras", "AgregarRespuesta", "Preguntas", new { idPregunta = Model.PreguntaID, idTest = ViewBag.idTest}, null)

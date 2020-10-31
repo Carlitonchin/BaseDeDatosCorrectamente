@@ -41,12 +41,13 @@ namespace BaseDatosFisica.Controllers
             return View();
         }
 
-        public ActionResult CreateDesdeRespuesta(int? idRespuesta)
+        public ActionResult CreateDesdeRespuesta(int? idRespuesta, int? idTest)
         {
             if (idRespuesta == null)
                 return Content("error");
 
             ViewBag.idRespuesta = idRespuesta;
+            ViewBag.idTest = idTest;
 
             return View();
         }
@@ -70,7 +71,7 @@ namespace BaseDatosFisica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateDesdeRespuesta([Bind(Include = "CategoriaID,CategoriaNombre")] Categoria categoria, int? idRespuesta)
+        public ActionResult CreateDesdeRespuesta([Bind(Include = "CategoriaID,CategoriaNombre")] Categoria categoria, int? idRespuesta, int? idTest)
         {
             if (idRespuesta == null)
                 return Content("error");
@@ -79,9 +80,10 @@ namespace BaseDatosFisica.Controllers
             {
                 db.Categorias.Add(categoria);
                 db.SaveChanges();
-                return RedirectToAction("AgregarCategoria", "Respuestas", new { idRespuesta = idRespuesta});
+                return RedirectToAction("AgregarCategoria", "Respuestas", new { idRespuesta = idRespuesta, idTest = idTest});
             }
             ViewBag.idRespuesta = idRespuesta;
+            ViewBag.idTest = idTest;
             return View(categoria);
         }
 
@@ -102,7 +104,7 @@ namespace BaseDatosFisica.Controllers
         }
 
         // GET: Categorias/Edit/5
-        public ActionResult EditDesdeRespuesta(int? idCategoria,int? idRespuesta)
+        public ActionResult EditDesdeRespuesta(int? idCategoria,int? idRespuesta, int? idTest)
         {
             if (idCategoria == null || idRespuesta == null)
             {
@@ -114,6 +116,7 @@ namespace BaseDatosFisica.Controllers
                 return HttpNotFound();
             }
             ViewBag.idRespuesta = idRespuesta;
+            ViewBag.idTest = idTest;
             return View(categoria);
         }
 
@@ -136,7 +139,7 @@ namespace BaseDatosFisica.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditDesdeRespuesta([Bind(Include = "CategoriaID,CategoriaNombre")] Categoria categoria, int? idRespuesta)
+        public ActionResult EditDesdeRespuesta([Bind(Include = "CategoriaID,CategoriaNombre")] Categoria categoria, int? idRespuesta, int? idTest)
         {
             if (idRespuesta == null)
                 return Content("error");
@@ -145,11 +148,12 @@ namespace BaseDatosFisica.Controllers
             {
                 db.Entry(categoria).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("AgregarCategoria", "Respuestas", new { idRespuesta = idRespuesta });
+                return RedirectToAction("AgregarCategoria", "Respuestas", new { idRespuesta = idRespuesta, idTest = idTest });
             }
 
 
             ViewBag.idRespuesta = idRespuesta;
+            ViewBag.idTest = idTest;
             return View(categoria);
         }
 

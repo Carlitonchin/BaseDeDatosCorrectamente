@@ -54,7 +54,7 @@ namespace BaseDatosFisica.Models.ParaLasVistas
 
                 foreach (var respuestaEscrita in testEstudiante.RespuestasEscritas)
                 {
-                    var texto = respuestaEscrita.Respuesta;
+                    var texto = respuestaEscrita.Respuesta ?? "";
                     var pregunta = respuestaEscrita.Pregunta;
 
                     var respuestaCorrecta = pregunta.Respuestas.FirstOrDefault(r => r.Texto.ToUpper() == texto.ToUpper());

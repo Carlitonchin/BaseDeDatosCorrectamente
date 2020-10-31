@@ -10,6 +10,9 @@ namespace BaseDatosFisica.Models
     {
         [Key]
         public int CategoriaID { get; set; }
+
+        [Display(Name ="Nombre")]
+        [Required(ErrorMessage ="Campo obligatorio")]
         public string CategoriaNombre { get; set; }
 
         public virtual ICollection<RespuestaCategoria> RespuestasCategoria { get; set; }

@@ -329,5 +329,10 @@ C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\Bas
 C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.AddedRespuestasMarcadastoTestEstudiantes.resources
 C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.time.resources
 C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.fixed_time.resources
-C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.csprojResolveAssemblyReference.cache
 C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.tiempoAgotado.resources
+C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.NoNulleableIntroduccionEnPreguntas.resources
+C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.CamposObligatorios.resources
+C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.MoreRequireds.resources
+C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.CampoTextoObligatorioEnRespuesta.resources
+C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.Migrations.NombreCampoObligatorioEnCategoria.resources
+C:\Users\Carlitonchin\Documents\PC\BaseDatosFisica\BaseDatosFisica\obj\Debug\BaseDatosFisica.csprojResolveAssemblyReference.cache

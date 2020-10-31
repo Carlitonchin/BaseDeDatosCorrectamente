@@ -114,10 +114,14 @@ namespace BaseDatosFisica.Controllers
                 db.SaveChanges();
             }
 
-            
 
-            resp_test.TiempoRestante = resp_test.pregunta.Tiempo - DateTime.Now.Subtract(estudianteTestPregunta.Inicio).TotalSeconds;
-            
+            int tiempoPrevio = 0;
+            if (resp_test.pregunta.Introduccion)
+                tiempoPrevio = (int)resp_test.pregunta.TiempoPrevio;
+
+            resp_test.TiempoRestante = resp_test.pregunta.Tiempo + tiempoPrevio - DateTime.Now.Subtract(estudianteTestPregunta.Inicio).TotalSeconds;
+           
+
             if(resp_test.TiempoRestante <= 0)
             {
                 var e = db.EstudiantePreguntaTest.FirstOrDefault(m => m.TestID == idTest && m.IdEstudiante == estudianteID && m.PreguntaID == resp_test.pregunta.PreguntaID);
@@ -127,8 +131,10 @@ namespace BaseDatosFisica.Controllers
 
                 return View("TiempoAgotado", idTest);
             }
+            if (resp_test.TiempoRestante - resp_test.pregunta.Tiempo >= 0)
+                return View("Introduccion", resp_test);
 
-            return View(resp_test);
+                return View(resp_test);
         }
         
         [HttpPost]
@@ -226,6 +232,15 @@ namespace BaseDatosFisica.Controllers
                 return Content("Error");
 
             return View(user.TestsEstudiante.ToList());
+        }
+
+        public ActionResult CalificacionesEstudiante()
+        {
+            var estudiante = db.Users.FirstOrDefault(e => e.UserName == User.Identity.Name);
+            if (estudiante == null)
+                return Content("Estudiante nulo");
+
+            return RedirectToAction("Calificaciones", new { idEstudiante = estudiante.Id });
         }
 
         public ActionResult Nota(int? idTestEstudiante)

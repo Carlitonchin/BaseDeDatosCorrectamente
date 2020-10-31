@@ -5,7 +5,7 @@
 
 <h2>Agregar preguntas al test @Model.test.Nombre</h2>
 <br />
-@Html.ActionLink("Crear nueva pregunta", "Create", "Preguntas")
+@Html.ActionLink("Crear nueva pregunta", "Create", "Preguntas", new { Introduccion_ = false, idTest = Model.test.TestID}, null)
 <table class="table">
     <tr>
         <th>
@@ -59,8 +59,16 @@
         <th>
             <div align="center">
                 <h2>Seleccione:</h2><br />
+
                 @{ int i = 0;}
                 <form method="post" action="@Url.Action("AgregarPregunta")">
+                    <div class="col-md-8">
+                        <div class="col-md-offset-2 col-md-10" align="right">
+                            <input type="submit" value="Agregar" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <br />
+                    <br />
                     <div class="form-group">
                         <input type="hidden" name="idTest" value="@Model.test.TestID"/>
                     </div>
@@ -79,11 +87,7 @@
                         
                     }
                     <br />
-                    <div class="col-md-8">
-                        <div class="col-md-offset-2 col-md-10" align="right">
-                            <input type="submit" value="Agregar" class="btn btn-default" />
-                        </div>
-                    </div>
+                 
                 </form>
             </div>
         </th>

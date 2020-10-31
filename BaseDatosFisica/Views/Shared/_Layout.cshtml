@@ -29,10 +29,14 @@
                         <li>@Html.ActionLink("Cursos", "Index", "Cursos")</li>
                         <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
                         <li>@Html.ActionLink("Estadisticas", "Index", "Estadisticas")</li>
+                        <li>@Html.ActionLink("Procedencias", "Index", "Procedencias")</li>
                     }
                     else
                     {
                         <li>@Html.ActionLink("RealizarTest", "Index", "ResponderTest")</li>
+
+
+                        <li>@Html.ActionLink("Test Realizados", "CalificacionesEstudiante", "ResponderTest")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

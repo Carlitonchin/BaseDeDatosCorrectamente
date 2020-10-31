@@ -1,0 +1,28 @@
+﻿@model BaseDatosFisica.Models.ApplicationUser
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Seguro que desea eliminar a @Model.Nombre @Model.Apellidos?</h2>
+
+<table>
+    <tr>
+        <td>
+            <a href="/Estudiantes/DeleteConfirmed?idEstudiante=@Model.Id" class="btn-default btn">Si</a> 
+        </td>
+        <td></td>
+        <td></td>
+        <td>|</td>
+        <td></td>
+        <td></td>
+        
+
+
+        <td>
+            <a href="/Estudiantes/Index" class="btn-default btn">No</a>
+        </td>
+    </tr>
+</table>
+
+ 
+

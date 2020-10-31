@@ -1,4 +1,4 @@
-﻿
+﻿@model BaseDatosFisica.Models.ParaLasVistas.EstadisticaProcedenciaViewModel
 @{
     ViewBag.Title = "Procedencia";
 }
@@ -10,56 +10,44 @@
         <th>
             Procedencia
         </th>
-        <th>
-            Curso 2018-2019
-        </th>
-        <th>
-            Curso 2019-2020
-        </th>
+        @foreach (var curso in Model.Cursos)
+        {
+            <th>
+                Curso @curso.Anho-@(curso.Anho + 1)
+            </th>
+        }
+        
         <th>
             Total
         </th>
     </tr>
-    <tr>
-        <td>
-            Lenin
-        </td>
-        <td>
-            1/4 (25%)
-        </td>
-        <td>
-            5/8 (63%)
-        </td>
-        <td>
-            6/12 (50%)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Proyecto UH
-        </td>
-        <td>
-            2/4 (50%)
-        </td>
-        <td>
-            3/8 (38%)
-        </td>
-        <td>
-            5/12 (42%)
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Preuniversitario
-        </td>
-        <td>
-            4/4 (100%)
-        </td>
-        <td>
-            1/8 (13%)
-        </td>
-        <td>
-            5/12 (42%)
-        </td>
-    </tr>
+    @foreach (var procedencia in Model.ProcedenciaCursos)
+    {
+        int TotalCorrectas = 0;
+        int TotalTotales = 0;
+        <tr>
+            <td>
+                @procedencia.Procedencia.valor
+            </td>
+            @foreach (var curso in Model.Cursos)
+            {
+                var correctas = procedencia.Correctas.ContainsKey(curso.CursoID) ? procedencia.Correctas[curso.CursoID] : 0;
+                var total = procedencia.Total.ContainsKey(curso.CursoID) ? procedencia.Total[curso.CursoID] : 0;
+                var porcentaje = total != 0 ? Math.Round((double)correctas / total * 100, 0) : 0;
+                TotalCorrectas += correctas;
+                TotalTotales += total;
+                <td>@correctas/@total (@porcentaje%)</td>
+            }
+
+            <td>
+               
+                @{var porcentajeT = TotalTotales != 0 ? Math.Round((double)TotalCorrectas / TotalTotales * 100, 0) : 0;}
+                @TotalCorrectas/@TotalTotales (@porcentajeT%)
+            </td>
+
+        </tr>
+
+    }
+   
+   
 </table>

@@ -38,14 +38,15 @@ namespace BaseDatosFisica.Controllers
         }
 
         // GET: Respuestas/Create
-        public ActionResult Create(int? idPregunta)
+        public ActionResult Create(int? idPregunta, int? idTest)
         {
             if (idPregunta != null)
                 ViewBag.PreguntaID = new SelectList(db.Preguntas, "PreguntaID", "Nombre", idPregunta);
             else
-                ViewBag.PreguntaID = new SelectList(db.Preguntas, "PreguntaID", "Nombre");
+                return Content("Una respuesta no puede existir sin una pregunta, vaya a una pregunta y agregue la respuesta desde alli");
 
             ViewBag.idPregunta = idPregunta;
+            ViewBag.idTest = idTest;
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace BaseDatosFisica.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "RespuestaID,Texto,Imagen,PreguntaID")] Respuesta respuesta)
+        public ActionResult Create([Bind(Include = "RespuestaID,Texto,Imagen,PreguntaID")] Respuesta respuesta, int? idTest)
         {
 
             if (respuesta == null)
@@ -79,14 +80,14 @@ namespace BaseDatosFisica.Controllers
                  p.Respuestas.Add(respuesta);
                  db.Entry(p).State = EntityState.Modified;
                  db.SaveChanges();*/
-                return RedirectToAction("AgregarRespuesta", "Preguntas", new { idPregunta = respuesta.PreguntaID });
+                return RedirectToAction("AgregarRespuesta", "Preguntas", new { idPregunta = respuesta.PreguntaID, idTest = idTest });
             }
-
+            ViewBag.idTest = idTest;
             ViewBag.PreguntaID = new SelectList(db.Preguntas, "PreguntaID", "Nombre", respuesta.PreguntaID);
             return View(respuesta);
         }
 
-        public ActionResult AgregarCategoria(int? idRespuesta)
+        public ActionResult AgregarCategoria(int? idRespuesta, int? idTest)
         {
             if (idRespuesta == null)
                 return Content("algo anda mal, intenta no navegar a mano");
@@ -100,12 +101,12 @@ namespace BaseDatosFisica.Controllers
             AgregarCategoriasARespuesta a = new AgregarCategoriasARespuesta();
             a.categorias = categorias;
             a.respuesta = r;
-
+            ViewBag.idTest = idTest;
             return View(a);
         }
 
         [HttpPost]
-        public ActionResult AgregarCategoria(int? idRespuesta, IEnumerable<int> categorias)
+        public ActionResult AgregarCategoria(int? idRespuesta, IEnumerable<int> categorias, int? idTest)
         {
             if (idRespuesta == null || categorias == null)
                 return Content("Algo anda mal, intente no navegar a mano");
@@ -121,7 +122,7 @@ namespace BaseDatosFisica.Controllers
                 db.SaveChanges();
             }
             
-            return RedirectToAction("AgregarCategoria", new { idRespuesta = idRespuesta });
+            return RedirectToAction("AgregarCategoria", new { idRespuesta = idRespuesta, idTest = idTest });
         }
 
         public ActionResult QuitarCategoria(int? id)
@@ -140,7 +141,7 @@ namespace BaseDatosFisica.Controllers
             return RedirectToAction("Respuesta", new { idRespuesta = rc.RespuestaID });
         }
 
-        public ActionResult Respuesta(int? idRespuesta)
+        public ActionResult Respuesta(int? idRespuesta, int? idTest)
         {
             if (idRespuesta == null)
                 return Content("Algo anda mal, intente no navegar a mano");
@@ -150,10 +151,11 @@ namespace BaseDatosFisica.Controllers
             if(resp == null)
                 return Content("Algo anda mal, intente no navegar a mano");
 
+            ViewBag.idTest = idTest;
             return View(resp);
         }
         // GET: Respuestas/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? idTest)
         {
             if (id == null)
             {
@@ -164,6 +166,7 @@ namespace BaseDatosFisica.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.idTest = idTest;
             ViewBag.PreguntaID = new SelectList(db.Preguntas, "PreguntaID", "Nombre", respuesta.PreguntaID);
             return View(respuesta);
         }
@@ -173,15 +176,16 @@ namespace BaseDatosFisica.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RespuestaID,Texto,Imagen,PreguntaID")] Respuesta respuesta)
+        public ActionResult Edit([Bind(Include = "RespuestaID,Texto,Imagen,PreguntaID")] Respuesta respuesta, int? idTest)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(respuesta).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Respuesta", new { idRespuesta = respuesta.RespuestaID });
+                return RedirectToAction("Respuesta", new { idRespuesta = respuesta.RespuestaID, idTest = idTest });
             }
             ViewBag.PreguntaID = new SelectList(db.Preguntas, "PreguntaID", "Nombre", respuesta.PreguntaID);
+            ViewBag.idTest = idTest;
             return View(respuesta);
         }
 

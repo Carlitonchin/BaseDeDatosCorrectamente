@@ -10,6 +10,8 @@ namespace BaseDatosFisica.Models
     {
         [Key]
         public int RespuestaID { get; set; }
+
+       [Required(ErrorMessage ="Campo obligatorio")]
         public string Texto { get; set; }
         public string Imagen { get; set; }
 

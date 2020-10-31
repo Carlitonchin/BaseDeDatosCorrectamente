@@ -4,22 +4,22 @@
 }
 
 <h2>Agregue respuestas a la pregunta @Model.Nombre</h2>
-@Html.ActionLink("Agregar Respuesta", "Create", "Respuestas", new { idPregunta = Model.PreguntaID}, null)
+@Html.ActionLink("Agregar Respuesta", "Create", "Respuestas", new { idPregunta = Model.PreguntaID, idTest = ViewBag.idTest}, null)
 <h3>Respuestas:</h3>
 <table class="table">
     @foreach (var resp in Model.Respuestas)
     {
         <tr>
             <th>
-                @Html.ActionLink(resp.Texto, "Respuesta", "Respuestas", new { idRespuesta = resp.RespuestaID }, null)
+                @Html.ActionLink(resp.Texto, "Respuesta", "Respuestas", new { idRespuesta = resp.RespuestaID, idTest = ViewBag.idTest }, null)
             </th>
 
             <th>
-                @Html.ActionLink("Quitar Respuesta", "QuitarRespuesta", new { idRespuesta = resp.RespuestaID, idPregunta = resp.PreguntaID })
+                @Html.ActionLink("Quitar Respuesta", "QuitarRespuesta", new { idRespuesta = resp.RespuestaID, idPregunta = resp.PreguntaID, idTest = ViewBag.idTest })
             </th>
         </tr>
     }
 </table>
 
-@Html.ActionLink("Atras", "Index")
+@Html.ActionLink("Atras", "Index", new { idTest = ViewBag.idTest})
 

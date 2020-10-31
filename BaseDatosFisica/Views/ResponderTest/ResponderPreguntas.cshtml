@@ -21,7 +21,7 @@
         var h3 = document.getElementById("tiempoRestante");
         tiempo -= 1;
         if (tiempo <= 0) {
-            var s = document.getElementById("submit");
+           
             location.reload(true);
         }
             
@@ -100,7 +100,9 @@
 
                                     <div class="form-group">
                                         <input type="hidden" name="index" value="@i" />
-
+                                        @if(resp.Imagen != null) { 
+                                        <img src="@Url.Content("~/images/" + resp.Imagen)" width="150px" height="100px" />
+                                        }
                                         <input type="checkbox" name="[@i]" value="@resp.RespuestaID" id="@i" onchange="cambie(this)" />
                                         @resp.Texto
 

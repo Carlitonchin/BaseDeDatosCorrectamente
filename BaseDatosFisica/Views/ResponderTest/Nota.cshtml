@@ -3,7 +3,7 @@
     ViewBag.Title = "Nota";
 }
 
-<h2>@Model.testEstudiante.estudiante.Nombre</h2>
+<h2>@Model.testEstudiante.estudiante.Nombre @Model.testEstudiante.estudiante.Apellidos</h2>
 <br />
 <h2>@Model.testEstudiante.test.Nombre</h2>
 <br />
@@ -70,6 +70,51 @@
             </tr>
         }
 
+
+</table>
+
+<br />
+<table class="table">
+
+    @foreach (var pregunta in Model.testEstudiante.test.TestPreguntas)
+    {
+        <tr>
+            <td>
+                <h3>Pregunta:</h3> @pregunta.Pregunta.Nombre
+            </td>
+
+            <td><h3>Enunciado:</h3> @pregunta.Pregunta.Enunciado</td>
+
+            <td>
+                <h3>Respuesta:</h3> 
+                @if (pregunta.Pregunta.Tipo)
+                {
+                    var respuesta = Model.testEstudiante.RespuestasMarcadas?.FirstOrDefault(p => p.Respuesta.Pregunta.PreguntaID == pregunta.PreguntaID);
+                    if(respuesta != null)
+                    {
+                        <p>@respuesta.Respuesta.Texto</p>
+                    }
+                    else
+                    {
+                        <p>-</p>
+                    }
+                }
+                else
+                {
+                    var respuesta = Model.testEstudiante.RespuestasEscritas?.FirstOrDefault(p => p.Pregunta.PreguntaID == pregunta.PreguntaID);
+                    if(respuesta != null)
+                    {
+                        var texto = respuesta.Respuesta == null ? "-" : respuesta.Respuesta;
+                        <p>@texto</p>
+                    }
+                    else
+                    {
+                        <p>-</p>
+                    }
+                }
+            </td>
+        </tr>
+    }
 
 </table>
 

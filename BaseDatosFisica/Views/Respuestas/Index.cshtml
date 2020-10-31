@@ -29,7 +29,16 @@
             @Html.DisplayFor(modelItem => item.Pregunta.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Texto)
+            @if (item.Texto != null)
+            {
+                @Html.DisplayFor(modelItem => item.Texto)
+
+            }
+            else
+            {
+                <p>Eliminame</p>
+            }
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Imagen)

@@ -14,10 +14,11 @@
         var imagen = document.getElementById("Imagen");
         var tipo = document.getElementById("Tipo");
        
+       
         document.getElementById("Nombre_").setAttribute("value", nombre.value);
         document.getElementById("Tiempo_").setAttribute("value", tiempo.value);
         document.getElementById("Enunciado_").setAttribute("value", enunciado.value);
-        
+       
             
             
             document.getElementById("Tipo_").setAttribute("value", tipo.value);
@@ -36,21 +37,30 @@
         <input type="hidden" name="Imagen_" id="Imagen_" />
         <input type="hidden" name="Tipo_" id="Tipo_" />
         <input type="hidden" name="Nombre_" id="Nombre_" />
-        @if ((bool)Model.Introduccion)
-        {
-            <input type="hidden" name="Introduccion_" value="true" />
-        }
-        else
-        {
-            <input type="hidden" name="Introduccion_" value="false" />
-        }
+        <input class="form-control" name="idTest" type="hidden" value="@ViewBag.idTest" />
 
         <div class="form-group">
             <div>
+
                 @{ string s = (Model.Introduccion != null && (bool)Model.Introduccion) ? "Quitar Introducción" : "Agregar Introducción";}
                 <input type="submit" value="@s" class="btn-link" />
+
+                @if ((bool)Model.Introduccion)
+                {
+                    <input type="hidden" name="Introduccion_" value="True" />
+                }
+                else
+                {
+                    <input type="hidden" name="Introduccion_" value="False" />
+                    <p>(pensado para preguntas de memoria)</p>
+                }
             </div>
+
         </div>
+
+    
+
+        
     </form>
     <hr />
     @using (Html.BeginForm())
@@ -60,9 +70,26 @@
 
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (Model.Introduccion != null && (bool)Model.Introduccion)
+            {
+                <input type="hidden" name="Introduccion" value="True" />
+            }
+            else
+            {
+                <input type="hidden" name="Introduccion" value="False" />
+            }
+
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Tipo">¿De marcar?</label>
+           
             <div class="col-md-10">
+                <select name="Introduccion" hidden="hidden">
+                    <option selected="selected" value="@Model.Introduccion"></option>
+                </select>
                    <select name="Tipo" id="Tipo" class="form-control">
                        @if (Model.Tipo)
                        {
@@ -85,8 +112,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2"})
             <div class="col-md-10">
-                <input type="text" name="Nombre" id="Nombre" class="form-control" value="@Model.Nombre"/>
-                
+                <input type="text" name="Nombre" class="form-control" id="Nombre"value="@Model.Nombre"/>
+                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -137,8 +164,9 @@
                     @Html.ValidationMessageFor(model => model.ImagenPrevia, "", new { @class = "text-danger" })
                 </div>
             </div>
-        }
 
+        }
+        <input class="form-control" name="idTest" type="hidden" value="@ViewBag.idTest" />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -149,7 +177,9 @@
 </div>
 
 <div>
-    @Html.ActionLink("Atras", "Index")
+    @Html.ActionLink("Atras", "Index", new { idTest = ViewBag.idTest})
+
+
 </div>
 
 <script type="text/javascript">

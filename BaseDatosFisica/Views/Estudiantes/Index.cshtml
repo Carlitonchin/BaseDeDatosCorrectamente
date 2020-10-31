@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BaseDatosFisica.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Estudiantes";
+}
+
+<h2>Estudiantes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Promedio
+        </th>
+        <th>
+            Número de Opción
+        </th>
+        <th>
+            Procedencia
+        </th>
+        <th>
+            Correo
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+               @Html.ActionLink(item.Nombre + " " + item.Apellidos, "Calificaciones", "ResponderTest", new {idEstudiante = item.Id }, null)
+            </td>
+            
+            <td>
+                @item.Promedio
+            </td>
+            <td>
+                @item.NumeroOpcion
+            </td>
+            <td>
+                @item.procedencia.valor
+            </td>
+            <td>
+                @item.Email
+            </td>
+
+           <td></td>
+            <td></td>
+            <td></td>
+            <td>@Html.ActionLink("Editar", "Edit", new { idEstudiante = item.Id})</td>
+            <td>@Html.ActionLink("Eliminar", "Delete", new { idEstudiante = item.Id })</td>
+
+            </tr>
+    }
+</table>

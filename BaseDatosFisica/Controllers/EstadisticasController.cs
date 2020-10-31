@@ -24,18 +24,21 @@ namespace BaseDatosFisica.Controllers
         public ActionResult Estudiante()
         {
             var EstadisticaEstudiante = new EstadisticaEstudianteTestViewModel();
-
+            
             return View(EstadisticaEstudiante);
         }
 
         public ActionResult Categoria()
         {
-            return View();
+            var EstadisticaCategoria = new CategoriaEstadisticasViewModel();
+
+            return View(EstadisticaCategoria);
         }
 
         public ActionResult Procedencia()
         {
-            return View();
+            EstadisticaProcedenciaViewModel stats = new EstadisticaProcedenciaViewModel();
+            return View(stats);
         }
     }
 }

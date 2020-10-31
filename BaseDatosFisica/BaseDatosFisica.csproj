@@ -171,6 +171,7 @@
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
+    <Compile Include="Controllers\EstudiantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PreguntasController.cs" />
@@ -262,6 +263,26 @@
     <Compile Include="Migrations\202010281403042_tiempoAgotado.Designer.cs">
       <DependentUpon>202010281403042_tiempoAgotado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010291633299_NoNulleableIntroduccionEnPreguntas.cs" />
+    <Compile Include="Migrations\202010291633299_NoNulleableIntroduccionEnPreguntas.Designer.cs">
+      <DependentUpon>202010291633299_NoNulleableIntroduccionEnPreguntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010302109301_CamposObligatorios.cs" />
+    <Compile Include="Migrations\202010302109301_CamposObligatorios.Designer.cs">
+      <DependentUpon>202010302109301_CamposObligatorios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010302119322_MoreRequireds.cs" />
+    <Compile Include="Migrations\202010302119322_MoreRequireds.Designer.cs">
+      <DependentUpon>202010302119322_MoreRequireds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010302203590_CampoTextoObligatorioEnRespuesta.cs" />
+    <Compile Include="Migrations\202010302203590_CampoTextoObligatorioEnRespuesta.Designer.cs">
+      <DependentUpon>202010302203590_CampoTextoObligatorioEnRespuesta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010302211031_NombreCampoObligatorioEnCategoria.cs" />
+    <Compile Include="Migrations\202010302211031_NombreCampoObligatorioEnCategoria.Designer.cs">
+      <DependentUpon>202010302211031_NombreCampoObligatorioEnCategoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -273,9 +294,11 @@
     <Compile Include="Models\ParaLasVistas\AgregarPreguntaAlTest.cs" />
     <Compile Include="Models\ParaLasVistas\AnhadirTestAlCurso.cs" />
     <Compile Include="Models\ParaLasVistas\CategoriaEstadisticasViewModel.cs" />
+    <Compile Include="Models\ParaLasVistas\EstadisticaProcedenciaViewModel.cs" />
     <Compile Include="Models\ParaLasVistas\EstadisticaEstudianteTestViewModel.cs" />
     <Compile Include="Models\ParaLasVistas\EstudianteCategoriasItemView.cs" />
     <Compile Include="Models\ParaLasVistas\EstudianteTestItemView.cs" />
+    <Compile Include="Models\ParaLasVistas\ProcedenciaCursosItemView.cs" />
     <Compile Include="Models\ParaLasVistas\ResponderTestViewModel.cs" />
     <Compile Include="Models\ParaLasVistas\RespuestaMarcaViewModel.cs" />
     <Compile Include="Models\ParaLasVistas\TestCurso_Pregunta.cs" />
@@ -427,6 +450,10 @@
     <Content Include="Views\Estadisticas\Categoria.cshtml" />
     <Content Include="Views\Estadisticas\Procedencia.cshtml" />
     <Content Include="Views\ResponderTest\TiempoAgotado.cshtml" />
+    <Content Include="Views\ResponderTest\Introduccion.cshtml" />
+    <Content Include="Views\Estudiantes\Index.cshtml" />
+    <Content Include="Views\Estudiantes\Edit.cshtml" />
+    <Content Include="Views\Estudiantes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -496,6 +523,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010281403042_tiempoAgotado.resx">
       <DependentUpon>202010281403042_tiempoAgotado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010291633299_NoNulleableIntroduccionEnPreguntas.resx">
+      <DependentUpon>202010291633299_NoNulleableIntroduccionEnPreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010302109301_CamposObligatorios.resx">
+      <DependentUpon>202010302109301_CamposObligatorios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010302119322_MoreRequireds.resx">
+      <DependentUpon>202010302119322_MoreRequireds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010302203590_CampoTextoObligatorioEnRespuesta.resx">
+      <DependentUpon>202010302203590_CampoTextoObligatorioEnRespuesta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010302211031_NombreCampoObligatorioEnCategoria.resx">
+      <DependentUpon>202010302211031_NombreCampoObligatorioEnCategoria.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -15,8 +15,10 @@ namespace BaseDatosFisica.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Preguntas
-        public ActionResult Index()
+        public ActionResult Index(int? idTest)
         {
+            if (idTest != null)
+                return RedirectToAction("AgregarPregunta", "Tests", new { idTest = idTest });
            
             return View(db.Preguntas.ToList());
         }
@@ -37,7 +39,7 @@ namespace BaseDatosFisica.Controllers
         }
 
         // GET: Preguntas/Create
-        public ActionResult Create(int? Tiempo_, bool? Tipo_, string Enunciado_, string Nombre_, string Imagen_, bool? Introduccion_)
+        public ActionResult Create(int? Tiempo_, bool? Tipo_, string Enunciado_, string Nombre_, string Imagen_, bool Introduccion_, int? idTest)
         {
 
             Pregunta pregunta = new Pregunta
@@ -54,19 +56,18 @@ namespace BaseDatosFisica.Controllers
                 pregunta.Tipo = (bool)Tipo_;
 
             pregunta.Introduccion = Introduccion_;
-            if (pregunta.Introduccion == null)
-                pregunta.Introduccion = false;
-
+            ViewBag.idTest = idTest;
+            
             return View(pregunta);
         }
 
         [HttpPost]
-        public ActionResult AgregarIntroduccion(int? Tiempo_, bool? Tipo_, string Enunciado_, string Nombre_, string Imagen_, bool? Introduccion_)
+        public ActionResult AgregarIntroduccion(int? Tiempo_, bool? Tipo_, string Enunciado_, string Nombre_, string Imagen_, bool? Introduccion_, int? idTest)
         {
             
             bool intr = !(bool)Introduccion_;
             
-            return RedirectToAction("Create", new { Tiempo_ = Tiempo_, Tipo_ = Tipo_, Enunciado_ = Enunciado_, Nombre_ = Nombre_, Imagen_ = Imagen_, Introduccion_ = intr});
+            return RedirectToAction("Create", new { Tiempo_ = Tiempo_, Tipo_ = Tipo_, Enunciado_ = Enunciado_, Nombre_ = Nombre_, Imagen_ = Imagen_, Introduccion_ = intr, idTest = idTest});
         }
 
         // POST: Preguntas/Create
@@ -74,16 +75,21 @@ namespace BaseDatosFisica.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PreguntaID,Tipo,Nombre,Enunciado,Imagen,Tiempo, TiempoPrevio, ImagenPrevia, EnunciadoPrevio")] Pregunta pregunta)
+        public ActionResult Create([Bind(Include = "PreguntaID,Tipo,Nombre,Enunciado,Imagen,Tiempo,Introduccion, TiempoPrevio, ImagenPrevia, EnunciadoPrevio")] Pregunta pregunta, int? idTest)
         {
-               
+            
+           if(pregunta.Introduccion && (pregunta.EnunciadoPrevio == null || pregunta.TiempoPrevio == null))
+            {
+                return Content("Por favor ve atras y agregue enunciado previo y tiempo previo, una pregunta de memoria lo requiere");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Preguntas.Add(pregunta);
                 db.SaveChanges();
-                return RedirectToAction("AgregarRespuesta", new { idPregunta = pregunta.PreguntaID });
+                return RedirectToAction("AgregarRespuesta", new { idPregunta = pregunta.PreguntaID , idTest = idTest });
             }
-
+            ViewBag.idTest = idTest;
             return View(pregunta);
         }
 
@@ -102,7 +108,7 @@ namespace BaseDatosFisica.Controllers
             return View("Edit", pregunta);
         }
 
-        public ActionResult AgregarRespuesta(int? idPregunta)
+        public ActionResult AgregarRespuesta(int? idPregunta, int? idTest)
         {
             if (idPregunta == null)
                 return Content("algo anda mal, intenta no navegar a mano");
@@ -112,10 +118,12 @@ namespace BaseDatosFisica.Controllers
             if(p == null)
                 return Content("algo anda mal, intenta no navegar a mano");
 
+            ViewBag.idTest = idTest;
+
             return View(p);
         }
 
-        public ActionResult QuitarRespuesta(int? idRespuesta, int? idPregunta)
+        public ActionResult QuitarRespuesta(int? idRespuesta, int? idPregunta, int? idTest)
         {
             if (idRespuesta == null || idPregunta == null)
                 return Content("Algo anda mal, intente no navegar a mano");
@@ -128,7 +136,7 @@ namespace BaseDatosFisica.Controllers
             RespuestasController rcController = new RespuestasController();
             rcController.DeleteConfirmed((int)idRespuesta);
 
-            return RedirectToAction("AgregarRespuesta", new { idPregunta = idPregunta });
+            return RedirectToAction("AgregarRespuesta", new { idPregunta = idPregunta, idTest = idTest });
         }
 
         // POST: Preguntas/Edit/5

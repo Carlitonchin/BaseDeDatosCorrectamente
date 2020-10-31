@@ -1,0 +1,39 @@
+﻿@model BaseDatosFisica.Models.ParaLasVistas.ResponderTestViewModel
+@{
+    ViewBag.Title = "Introduccion";
+}
+
+<script type="text/javascript">
+
+    var tiempo = parseInt(@Model.TiempoRestante - @Model.pregunta.Tiempo) + 1;
+  
+
+    function Tiempo() {
+
+        var h3 = document.getElementById("tiempoRestante");
+        tiempo -= 1;
+        if (tiempo <= 0) {
+           
+            location.reload(true);
+        }
+
+        h3.innerHTML = "Tiempo Restante " + tiempo;
+        window.setTimeout("Tiempo()", 1000);
+    }
+
+</script>
+
+<body onload="Tiempo()">
+
+    <h2>Pregunta @Model.pregunta.Nombre</h2>
+    <br />
+    <h3>@Model.pregunta.EnunciadoPrevio</h3>
+    <br />
+    <div class="col-md-8">
+        <img src="@Url.Content("~/images/" + Model.pregunta.ImagenPrevia)" width="300px" height="200px" />
+
+        <h3 id="tiempoRestante">Tiempo Restante</h3>
+    </div>
+
+</body>
+

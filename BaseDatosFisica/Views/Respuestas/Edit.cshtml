@@ -40,7 +40,7 @@
                 @Html.ValidationMessageFor(model => model.PreguntaID, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <input class="form-control" name="idTest" type="hidden" value="@ViewBag.idTest" />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -50,7 +50,7 @@
 }
 
 <div>
-    @Html.ActionLink("Atras", "Respuesta", new { idRespuesta = Model.RespuestaID})
+    @Html.ActionLink("Atras", "Respuesta", new { idRespuesta = Model.RespuestaID, idTest = ViewBag.idTest})
 </div>
 
 @section Scripts {
